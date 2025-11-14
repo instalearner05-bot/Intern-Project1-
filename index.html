@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIpreneurs Global Challenge 2025 - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="landing-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h1>🚀 AIpreneurs Global Challenge 2025</h1>
+                <p class="tagline">Management Panel</p>
+            </div>
+            <div class="navbar-links">
+                <button class="btn btn-primary" onclick="redirectToLogin()">Sign In</button>
+                <button class="btn btn-secondary" onclick="toggleSignup()">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to AIpreneurs Global Challenge 2025</h2>
+            <p>A comprehensive management platform for participants, admins, and stakeholders</p>
+            <div class="hero-buttons">
+                <button class="btn btn-large btn-primary" onclick="redirectToLogin()">Login</button>
+                <button class="btn btn-large btn-secondary" onclick="toggleSignup()">Create Account</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Platform Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔐 Secure Authentication</h3>
+                <p>Role-based access control with Firebase Authentication</p>
+            </div>
+            <div class="feature-card">
+                <h3>👥 Multi-Role Dashboard</h3>
+                <p>Customized views for Super Admin, Admin, Participants, and more</p>
+            </div>
+            <div class="feature-card">
+                <h3>📝 Task Management</h3>
+                <p>Upload, distribute, and track submission progress</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎯 Jury Evaluation</h3>
+                <p>Score submissions and auto-generate rankings</p>
+            </div>
+            <div class="feature-card">
+                <h3>📢 Announcements</h3>
+                <p>Real-time event updates for all users</p>
+            </div>
+            <div class="feature-card">
+                <h3>☁️ Cloud Storage</h3>
+                <p>Secure file uploads with Firebase Storage</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Roles Section -->
+    <section class="roles-info">
+        <h2>User Roles & Access Levels</h2>
+        <div class="roles-grid">
+            <div class="role-card role-super-admin">
+                <h4>👑 Super Admin</h4>
+                <p>Full system control, approve admins, view analytics</p>
+            </div>
+            <div class="role-card role-admin">
+                <h4>⚙️ Admin</h4>
+                <p>Manage participants, tasks, and announcements</p>
+            </div>
+            <div class="role-card role-developer">
+                <h4>💻 Developer</h4>
+                <p>Technical module management and system testing</p>
+            </div>
+            <div class="role-card role-volunteer">
+                <h4>🤝 Volunteer</h4>
+                <p>Review submissions, provide feedback</p>
+            </div>
+            <div class="role-card role-jury">
+                <h4>⭐ Jury</h4>
+                <p>Evaluate projects and assign scores</p>
+            </div>
+            <div class="role-card role-coordinator">
+                <h4>🏫 Institution Coordinator</h4>
+                <p>Upload participant lists, track institution progress</p>
+            </div>
+            <div class="role-card role-participant">
+                <h4>👨‍💼 Participant</h4>
+                <p>Upload tasks, view progress and announcements</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign-Up Modal -->
+    <div id="signupModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="toggleSignup()">&times;</span>
+            <h2>Create Account</h2>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name:</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email:</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password:</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupRole">Role:</label>
+                    <select id="signupRole" required>
+                        <option value="">Select Role</option>
+                        <option value="Participant">Participant</option>
+                        <option value="Volunteer">Volunteer</option>
+                        <option value="Institution Coordinator">Institution Coordinator</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="signupInstitution">Institution (if applicable):</label>
+                    <input type="text" id="signupInstitution">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                <p class="text-center mt-3">Already have an account? <a href="#" onclick="toggleSignup(); redirectToLogin()">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <footer class="footer">
+        <p>&copy; 2025 AIpreneurs Global Challenge. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
+    <!-- Demo Mode (for testing without Firebase) -->
+    <script src="demo-mode.js"></script>
+    
+    <!-- Main Script -->
+    <script src="script.js"></script>
+
+    <script>
+        // Redirect to login page
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        // Toggle signup modal
+        function toggleSignup() {
+            const modal = document.getElementById('signupModal');
+            modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        // Handle signup form
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const role = document.getElementById('signupRole').value;
+            const institution = document.getElementById('signupInstitution').value;
+
+            try {
+                if (!firebaseInitialized || !auth) {
+                    showToast('Firebase not configured. Please set up Firebase first.', 'error');
+                    return;
+                }
+
+                // Create user in Firebase Auth
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const userId = userCredential.user.uid;
+
+                // Store user data in Firestore
+                await db.collection('users').doc(userId).set({
+                    uid: userId,
+                    name: name,
+                    email: email,
+                    role: role,
+                    institution: institution || 'N/A',
+                    createdAt: new Date(),
+                    status: 'Active',
+                    lastLogin: new Date()
+                });
+
+                // Log the action
+                await logActivity(userId, 'User Registration', `${name} registered as ${role}`);
+
+                showToast('Account created successfully! Redirecting to login...', 'success');
+                setTimeout(() => {
+                    redirectToLogin();
+                }, 2000);
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        }
+
+        // Check if user is already logged in
+        if (firebaseInitialized && auth) {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    window.location.href = 'dashboard.html';
+                }
+            });
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
